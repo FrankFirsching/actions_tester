@@ -23,13 +23,15 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
+        # NOTE: When adding a new blender version also add the corresponding
+        # python version below.
         blender-version: ["2.92", "2.93"]
         os: [ubuntu-latest, windows-latest]
         include:
         - blender-version: 2.92
-          python-version: 3.7
+          python-version: 37
         - blender-version: 2.93
-          python-version: 3.9
+          python-version: 39
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -41,3 +43,4 @@ jobs:
           echo "blender version: ${{ matrix.blender-version }}"
           echo "os: ${{ matrix.os }}"
           echo "python: ${{ matrix.python-version }}"
+          echo "${{ github.ref }}"
