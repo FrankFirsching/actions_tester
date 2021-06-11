@@ -45,6 +45,6 @@ jobs:
           echo "python: ${{ matrix.python-version }}"
           echo "${{ github.ref }}"
       - name: Only on main
-        if: {{ github.ref }} == refs/heads/main
+        if: github.ref == 'refs/heads/main'
         run: |
           echo "Deploying"
