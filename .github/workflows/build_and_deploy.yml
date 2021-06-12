@@ -28,9 +28,17 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         include:
         - blender-version: 2.92
-          python-version: 37
+          os: windows-latest
+          python-version: 37/bin/python
         - blender-version: 2.93
-          python-version: 39
+          os: windows-latest
+          python-version: 39/bin/python
+        - blender-version: 2.92
+          os: ubuntu-latest
+          python-version: bin/python3.7m
+        - blender-version: 2.93
+          os: ubuntu-latest
+          python-version: bin/python3.9
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
