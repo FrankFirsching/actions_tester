@@ -39,6 +39,10 @@ jobs:
         - blender-version: 2.93
           os: ubuntu-latest
           python-version: bin/python3.9
+        - os: ubuntu-latest
+          os_tag: Linux
+        - os: windows-latest
+          os_tag: Windows
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -50,6 +54,7 @@ jobs:
           echo "blender version: ${{ matrix.blender-version }}"
           echo "os: ${{ matrix.os }}"
           echo "python: ${{ matrix.python-version }}"
+          echo "os_tag: ${{ matrix.os_tag }}"
           echo "${{ github.ref }}"
       - name: Only on main
         if: github.ref == 'refs/heads/main'
