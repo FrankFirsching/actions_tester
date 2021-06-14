@@ -50,8 +50,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       # Show what's there
-      - name: show data
-        shell: bash
+      - name: install packages
+        shell: msys2bash.cmd
         run: |
           echo $0
           pacman -Ss rsync
