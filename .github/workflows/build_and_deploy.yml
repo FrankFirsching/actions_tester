@@ -24,15 +24,10 @@ jobs:
       matrix:
         # NOTE: When adding a new blender version also add the corresponding
         # python version below.
-        blender-version: ["2.92", "2.93"]
-        os: [ubuntu-latest, windows-latest]
         include:
-        - os: ubuntu-latest
-          os_tag: Linux
-        - os: windows-latest
-          os_tag: Windows
+        - { os: ubuntu-latest, shell: bash, os_tag: Linux }
+        - { os: windows-latest, shell: msys2, os_tag: Windows }
         - blender-version: 2.92
-          os: windows-latest
           python-version: 37/bin/python
         - blender-version: 2.93
           os: windows-latest
@@ -64,7 +59,7 @@ jobs:
           rsync --help
           zip --help
       - name: show data
-        shell: bash
+        shell: ${{ matrix.shell} {0}
         run: |
           echo "blender version: ${{ matrix.blender-version }}"
           echo "os: ${{ matrix.os }}"
