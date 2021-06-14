@@ -59,7 +59,7 @@ jobs:
           rsync --help
           zip --help
       - name: show data
-        shell: ${{ matrix.shell}} {0}
+        shell: ${{ matrix.shell }} {0}
         run: |
           echo "blender version: ${{ matrix.blender-version }}"
           echo "os: ${{ matrix.os }}"
