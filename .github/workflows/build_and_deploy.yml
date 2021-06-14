@@ -41,8 +41,9 @@ jobs:
         - blender-version: 2.93
           sys.os: ubuntu-latest
           python-version: bin/python3.9
-
-
+    defaults:
+      run:
+        shell: '${{ matrix.os.shell }} {0}'
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -62,7 +63,6 @@ jobs:
           rsync --help
           zip --help
       - name: show data
-        shell: ${{ matrix.sys.shell }} {0}
         run: |
           echo "blender version: ${{ matrix.blender-version }}"
           echo "os: ${{ matrix.sys.os }}"
