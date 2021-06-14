@@ -26,8 +26,8 @@ jobs:
         # NOTE: When adding a new blender version also add the corresponding
         # python version below.
         sys:
-        - { os: ubuntu-latest, shell: bash, os_tag: Linux }
-        - { os: windows-latest, shell: msys2, os_tag: Windows }
+        - { os: ubuntu-latest, os_tag: Linux }
+        - { os: windows-latest, os_tag: Windows }
         blender-version: [ 2.92, 2.93 ]
         include:
         - blender-version: 2.92
@@ -58,13 +58,8 @@ jobs:
         if: ${{ matrix.sys.os == 'windows-latest' }}
         run: echo "C:\msys64\usr\bin" >> $GITHUB_PATH
         shell: bash
-      - name: install packages
-        shell: msys2 {0}
-        if: ${{ matrix.sys.os == 'windows-latest' }}
-        run: |
-          rsync --help
-          zip --help
       - name: show data
+        shell: bash
         run: |
           echo "blender version: ${{ matrix.blender-version }}"
           echo "os: ${{ matrix.sys.os }}"
