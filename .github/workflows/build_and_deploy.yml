@@ -52,13 +52,17 @@ jobs:
       # Show what's there
       - uses: msys2/setup-msys2@v2
         if: ${{ matrix.os == 'windows-latest' }}
+        with:
+          release: false
+          install: |
+            rsync
+            zip
       - name: install packages
         shell: msys2 {0}
         if: ${{ matrix.os == 'windows-latest' }}
         run: |
-          echo $0
-          pacman -Ss rsync
-          pacman -Ss zip
+          rsync --help
+          zip --help
       - name: show data
         shell: bash
         run: |
