@@ -71,7 +71,8 @@ jobs:
           echo "python: ${{ matrix.python-version }}"
           echo "os_tag: ${{ matrix.sys.os_tag }}"
           echo "${{ github.ref }}"
-          echo "${{ matrix }}"
+          rsync --help
+          zip --help
       - name: Only on main
         if: github.ref == 'refs/heads/main'
         run: |
