@@ -24,24 +24,22 @@ jobs:
       matrix:
         # NOTE: When adding a new blender version also add the corresponding
         # python version below.
+        sys:
+        - { os: ubuntu-latest, shell: bash, os_tag: Linux }
+        - { os: windows-latest, shell: msys2, os_tag: Windows }
+        blender-version: [ 2.92, 2.93 ]
         include:
-        - os: ubuntu-latest
-          shell: bash
-          os_tag: Linux
-        - os: windows-latest
-          shell: msys2
-          os_tag: Windows
         - blender-version: 2.92
-          os: windows-latest
+          sys.os: windows-latest
           python-version: 37/bin/python
         - blender-version: 2.93
-          os: windows-latest
+          sys.os: windows-latest
           python-version: 39/bin/python
         - blender-version: 2.92
-          os: ubuntu-latest
+          sys.os: ubuntu-latest
           python-version: bin/python3.7m
         - blender-version: 2.93
-          os: ubuntu-latest
+          sys.os: ubuntu-latest
           python-version: bin/python3.9
 
 
@@ -51,7 +49,7 @@ jobs:
       - uses: actions/checkout@v2
       # Show what's there
       - uses: msys2/setup-msys2@v2
-        if: ${{ matrix.os == 'windows-latest' }}
+        if: ${{ matrix.sys.os == 'windows-latest' }}
         with:
           release: false
           install: |
@@ -59,17 +57,17 @@ jobs:
             zip
       - name: install packages
         shell: msys2 {0}
-        if: ${{ matrix.os == 'windows-latest' }}
+        if: ${{ matrix.sys.os == 'windows-latest' }}
         run: |
           rsync --help
           zip --help
       - name: show data
-        shell: bash
+        shell: ${{ matrix.sys.shell }} {0}
         run: |
           echo "blender version: ${{ matrix.blender-version }}"
-          echo "os: ${{ matrix.os }}"
+          echo "os: ${{ matrix.sys.os }}"
           echo "python: ${{ matrix.python-version }}"
-          echo "os_tag: ${{ matrix.os_tag }}"
+          echo "os_tag: ${{ matrix.sys.os_tag }}"
           echo "${{ github.ref }}"
           echo "${{ matrix }}"
       - name: Only on main
