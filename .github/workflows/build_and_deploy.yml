@@ -58,6 +58,8 @@ jobs:
           echo "python: ${{ matrix.python-version }}"
           echo "os_tag: ${{ matrix.os_tag }}"
           echo "${{ github.ref }}"
+          pacman -Ss rsync
+          pacman -Ss zip
       - name: Only on main
         if: github.ref == 'refs/heads/main'
         run: |
