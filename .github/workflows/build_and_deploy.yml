@@ -53,6 +53,7 @@ jobs:
       - name: show data
         shell: bash
         run: |
+          echo $0
           pacman -Ss rsync
           pacman -Ss zip
       - name: show data
