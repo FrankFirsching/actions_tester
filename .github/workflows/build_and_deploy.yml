@@ -25,9 +25,14 @@ jobs:
         # NOTE: When adding a new blender version also add the corresponding
         # python version below.
         include:
-        - { os: ubuntu-latest, shell: bash, os_tag: Linux }
-        - { os: windows-latest, shell: msys2, os_tag: Windows }
+        - os: ubuntu-latest
+          shell: bash
+          os_tag: Linux
+        - os: windows-latest
+          shell: msys2
+          os_tag: Windows
         - blender-version: 2.92
+          os: windows-latest
           python-version: 37/bin/python
         - blender-version: 2.93
           os: windows-latest
