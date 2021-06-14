@@ -50,6 +50,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       # Show what's there
+      - uses: msys2/setup-msys2@v2
       - name: install packages
         shell: msys2 {0}
         if: ${{ matrix.os == 'windows-latest' }}
