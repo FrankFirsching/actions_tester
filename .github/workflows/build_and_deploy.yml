@@ -44,7 +44,7 @@ jobs:
           python-version: bin/python3.9
     defaults:
       run:
-        shell: '${{ matrix.os.shell }} {0}'
+        shell: ${{ matrix.os.shell }} {0}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
