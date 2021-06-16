@@ -87,6 +87,6 @@ jobs:
         uses: actions/download-artifact@v2
       - name: show artifacts
         shell: bash
-        run:
+        run: |
           ls -l
           cat out-Linux-2.92.txt
