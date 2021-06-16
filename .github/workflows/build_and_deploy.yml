@@ -74,7 +74,6 @@ jobs:
       # Pull requests and non-main branches store artifacts
       - name: Archive production artifacts
         id: upload_artifact
-        if: ${{ github.event_name == 'pull_request' || (!startswith(github.ref, 'refs/heads/main') && !startswith(github.ref, 'refs/tags')) }}
         uses: actions/upload-artifact@v2
         with:
           name: out-${{ matrix.sys.os_tag }}-${{ matrix.blender-version }}.txt
