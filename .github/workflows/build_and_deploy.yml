@@ -51,9 +51,6 @@ jobs:
         if: startsWith(matrix.sys.os, 'windows')
         with:
           release: false
-          install: |
-            rsync
-            zip
       - name: switch git-bash shell to msys2 shell by adding msys2 path to PATH front
         if: startsWith(matrix.sys.os, 'windows')
         run: echo "C:\msys64\usr\bin" >> $GITHUB_PATH
@@ -68,9 +65,8 @@ jobs:
           echo "python: ${{ matrix.python-version }}" >> $OUTFILE
           echo "os_tag: ${{ matrix.sys.os_tag }}" >> $OUTFILE
           echo "${{ github.ref }}" >> $OUTFILE
-          cat >> $OUTFILE
-          rsync --help
-          zip --help
+          echo "${{ github.event_name }}" >> $OUTFILE
+          cat $OUTFILE
       # Pull requests and non-main branches store artifacts
       - name: Archive production artifacts
         id: upload_artifact
