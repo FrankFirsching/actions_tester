@@ -60,15 +60,34 @@ jobs:
         shell: bash
       - name: show data
         shell: bash
+        env:
+          OUTFILE: out-${{ matrix.sys.os_tag }}-${{ matrix.blender-version }}.txt
         run: |
-          echo "blender version: ${{ matrix.blender-version }}"
-          echo "os: ${{ matrix.sys.os }}"
-          echo "python: ${{ matrix.python-version }}"
-          echo "os_tag: ${{ matrix.sys.os_tag }}"
-          echo "${{ github.ref }}"
+          echo "blender version: ${{ matrix.blender-version }}" > $OUTFILE
+          echo "os: ${{ matrix.sys.os }}" >> $OUTFILE
+          echo "python: ${{ matrix.python-version }}" >> $OUTFILE
+          echo "os_tag: ${{ matrix.sys.os_tag }}" >> $OUTFILE
+          echo "${{ github.ref }}" >> $OUTFILE
+          cat >> $OUTFILE
           rsync --help
           zip --help
-      - name: Only on main
-        if: github.ref == 'refs/heads/main'
-        run: |
-          echo "Deploying"
+      # Pull requests and non-main branches store artifacts
+      - name: Archive production artifacts
+        id: upload_artifact
+        if: ${{ github.event_name == 'pull_request' || (!startswith(github.ref, 'refs/heads/main') && !startswith(github.ref, 'refs/tags')) }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: out-${{ matrix.sys.os_tag }}-${{ matrix.blender-version }}.txt
+          path: |
+            out-${{ matrix.sys.os_tag }}-${{ matrix.blender-version }}.txt
+  # Test the add-on
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v2
+      - name: show artifacts
+        shell: bash
+        run:
+          ls -l
