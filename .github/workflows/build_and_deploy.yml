@@ -76,7 +76,7 @@ jobs:
         id: upload_artifact
         uses: actions/upload-artifact@v2
         with:
-          name: out-${{ matrix.sys.os_tag }}-${{ matrix.blender-version }}.txt
+          name: artifact-${{ matrix.sys.os_tag }}-${{ matrix.blender-version }}
           path: out-${{ matrix.sys.os_tag }}-${{ matrix.blender-version }}.txt
   # Test the add-on
   deploy:
@@ -89,4 +89,4 @@ jobs:
         shell: bash
         run: |
           ls -l
-          cat out-Linux-2.92.txt
+          find . -name "*.txt"
