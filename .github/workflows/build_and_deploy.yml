@@ -76,7 +76,7 @@ jobs:
         id: upload_artifact
         uses: actions/upload-artifact@v2
         with:
-          name: artifact-${{ matrix.sys.os_tag }}-${{ matrix.blender-version }}
+          name: artifact
           path: out-${{ matrix.sys.os_tag }}-${{ matrix.blender-version }}.txt
   # Test the add-on
   deploy:
